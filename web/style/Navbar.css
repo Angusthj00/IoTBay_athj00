@@ -1,0 +1,93 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 5 May 2023, 6:35:20 am
+    Author     : angus
+*/
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 95px;
+    height: 100vh;
+    background-color: #0066cc;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-logo, .navbar-profile {
+    height: 75px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-logo {
+    font-size: 18px;
+}
+
+.navbar-profile > img {
+    height: 25px;
+    width: auto;
+}
+
+.navbar-main {
+    flex: 1;
+}
+
+.navbar-item {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.navbar-item:hover {
+    background-color: #1790e7;
+}
+
+.active-navbar-item {
+    background-color: #004898;
+}
+
+.navbar-item > img {
+    width: auto;
+    margin-bottom: 5px;
+}
+
+.navbar-item:nth-child(1) > img {
+    height: 17px;
+}
+
+.navbar-item:nth-child(2) > img {
+    height: 20px;
+}
+
+.navbar-item:nth-child(3) > img {
+    height: 30px;
+}
+
+.navbar-item:nth-child(4) > img {
+    height: 22px;
+}
+
+.navbar-item:nth-child(5) > img {
+    height: 21px;
+}
+
+.navbar-item:nth-child(6) > img {
+    height: 20px;
+}
+
+
+
