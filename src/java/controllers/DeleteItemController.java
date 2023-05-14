@@ -36,10 +36,21 @@ public class DeleteItemController extends HttpServlet {
         String itemToDelete = request.getParameter("itemName");
         String selectedCategory = (String) session.getAttribute("selectedCategory");
         try {
-                            
+            ArrayList<Item> items; 
+            
             itemManager.deleteItem(itemToDelete);
-            ArrayList<Item> items = itemManager.fetchItemsByCategory("", selectedCategory); //selected category previously
 
+            if ((itemManager.fetchItemsByCategory("", selectedCategory)).isEmpty()) { //no more items in that category
+                ArrayList<ArrayList<String>> categories = itemManager.fetchCategories(); //update the categories
+                session.setAttribute("categories", categories);
+                
+                session.setAttribute("selectedCategory", "All");
+                items = itemManager.fetchItemsByCategory("", "All"); //show All instead
+
+            } else { //still some item in the selected category
+                items = itemManager.fetchItemsByCategory("", selectedCategory);
+            }
+            
             session.setAttribute("popupMsg", "One item deleted.");
             session.setAttribute("items", items);
             

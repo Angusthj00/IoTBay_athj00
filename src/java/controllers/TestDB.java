@@ -14,6 +14,7 @@ import model.DAO.*;
  *
  * @author angus
  */
+
 public class TestDB {
     private static Scanner in = new Scanner(System.in);
     private DBConnector connector;

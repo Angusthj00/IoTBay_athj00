@@ -27,29 +27,6 @@ import model.DAO.*;
  * @author angus
  */
 public class ItemManagementController extends HttpServlet {
-//    private DBConnector db;
-//    private DBItemManager itemManager;
-//    private Connection conn;
-   
-//    @Override
-//    public void init() {
-//        HttpSession session = request.getSession();
-//        try {
-//            db = new DBConnector();
-//        } catch (ClassNotFoundException | SQLException ex) {
-//            Logger.getLogger(ItemManagementController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        conn = db.openConnection();
-//        
-//        try {
-//            itemManager = new DBItemManager(conn);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ItemManagementController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        request.getSession().setAttribute("itemManager", itemManager);
-//    }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -82,6 +59,10 @@ public class ItemManagementController extends HttpServlet {
             session.setAttribute("categories", categories);
             session.setAttribute("items", items);
             
+            //store image path in session
+            String imagePath = "DBImages/";
+            session.setAttribute("imagePath", imagePath);
+            
             request.getRequestDispatcher("ItemManagement.jsp").include(request, response); 
             
         } catch (SQLException ex) {
@@ -90,13 +71,6 @@ public class ItemManagementController extends HttpServlet {
         }
 
     }
-//    
-//    @Override
-//    public void destroy() {
-//        try {
-//            db.closeConnection();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ItemManagementController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+
+    
 }

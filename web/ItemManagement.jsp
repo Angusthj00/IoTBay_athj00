@@ -169,9 +169,10 @@
                             </tr>
                             <%
                                 for (Item item : itemList) {
+                                String imagePath = (String) session.getAttribute("imagePath"); //retrieve the image path
                             %>
                             <tr class="table-content">
-                                <td style="width: 8%; padding-left: 15px;"><img style="height: 60px; width: auto;" src="images/itemDemoImage.jpg" alt="demo item"></td>
+                                <td class="image-table-data"><img src="<%=imagePath + item.getImage()%>" alt="demo item"></td>
                                 <td><%=item.getName()%></td>
                                 <td><%=item.getCategory()%></td>
                                 <td><%=item.getQuantity()%></td>

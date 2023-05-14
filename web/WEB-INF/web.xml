@@ -29,6 +29,7 @@
         <servlet-name>EditItemController</servlet-name>
         <servlet-class>controllers.EditItemController</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -57,6 +58,7 @@
         <servlet-name>EditItemController</servlet-name>
         <url-pattern>/EditItemController</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30

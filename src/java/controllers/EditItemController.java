@@ -21,11 +21,17 @@ import jakarta.servlet.http.HttpSession;
 import model.DAO.*;
 import models.Item;
 
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
 /**
  *
  * @author angus
  */
+
+@MultipartConfig
 public class EditItemController extends HttpServlet {
     
     @Override
@@ -37,18 +43,16 @@ public class EditItemController extends HttpServlet {
         DBItemManager itemManager = (DBItemManager) session.getAttribute("itemManager");
          
         String itemToEdit = request.getParameter("name");
-        String selectedCategory = (String) session.getAttribute("selectedCategory");
         
         String itemName = request.getParameter("itemName");
         String itemCategory = request.getParameter("itemCategory");
-        String itemImage = request.getParameter("itemImage");
+        String itemImage = request.getParameter("image");
+        Part file = request.getPart("itemImage");
         String itemDescription = request.getParameter("itemDescription");
         String itemPrice = request.getParameter("itemPrice");
         String itemQuantity = request.getParameter("itemQuantity");
-          
-        ArrayList<Item> items = new ArrayList<>();
-        
-        if (validator.checkEmpty(itemName, itemCategory, itemImage, itemPrice, itemQuantity)) {
+                  
+        if (validator.checkEmpty(itemName, itemCategory, itemPrice, itemQuantity)) {
             session.setAttribute("addItemErr", "Please fill in the required fields.");
             request.getRequestDispatcher("AddItem.jsp").include(request, response);
         } else if (!validator.validateItemName(itemName)) {
@@ -57,9 +61,6 @@ public class EditItemController extends HttpServlet {
         } else if (!validator.validateItemCategory(itemCategory)) {
             session.setAttribute("addItemErr", "Please enter a valid item category.");
             request.getRequestDispatcher("AddItem.jsp").include(request, response); 
-        } else if (!validator.validateItemImage(itemImage)) {
-            session.setAttribute("addItemErr", "Please upload a valid image format (jpeg/jpg/png).");
-            request.getRequestDispatcher("AddItem.jsp").include(request, response);
         } else if (!validator.validateItemDescription(itemDescription)) {
             session.setAttribute("addItemErr", "Please enter a valid item description.");
             request.getRequestDispatcher("AddItem.jsp").include(request, response);
@@ -70,21 +71,37 @@ public class EditItemController extends HttpServlet {
             session.setAttribute("addItemErr", "Please enter a valid item quantity.");
             request.getRequestDispatcher("AddItem.jsp").include(request, response);
         } else {
+                //image upload process
+
+//                if (file.getSize() != 0) { //if upload a new image
+            String imageFileName = file.getSubmittedFileName(); //get selected image file name
+
+                    //upload path where we have to upload our actual image
+            String uploadPath = "C:/Users/angus/OneDrive/Documents/NetBeansProjects/IoTBayProductCatalogue/web/DBImages/" + imageFileName;
+                    
+
+                
+//                } else {
+//                    imageFileName = itemImage;
+//                }            
             try {  
+                //image process*****
+                FileOutputStream fos = new FileOutputStream(uploadPath);
+                InputStream is = file.getInputStream();
+
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                fos.write(data);
+                fos.close(); //*****
+
                 double doublePrice = Double.parseDouble(itemPrice);
                 int intQuantity = Integer.parseInt(itemQuantity);
-                
-                itemManager.updateItem(itemToEdit, itemName, itemCategory, itemImage, itemDescription, doublePrice, intQuantity);
 
-                if (selectedCategory.equals(itemCategory)) { //if user didnt change the category field
-                    items = itemManager.fetchItemsByCategory("", selectedCategory);            
-                } else { //if user change the category field
-                    items = itemManager.fetchItemsByCategory("", itemCategory);            
-                    session.setAttribute("selectedCategory", itemCategory);
-                }
-
-                session.setAttribute("popupMsg", "Item updated.");
+                itemManager.updateItem(itemToEdit, itemName, itemCategory, "", itemDescription, doublePrice, intQuantity);
+                ArrayList<Item> items = itemManager.fetchItemsByCategory(itemName, itemCategory);
                 session.setAttribute("items", items);
+                
+                session.setAttribute("popupMsg", "Item updated.");
                 request.getRequestDispatcher("ItemManagement.jsp").include(request, response);
 
             } catch (SQLException ex) {
@@ -93,4 +110,4 @@ public class EditItemController extends HttpServlet {
         }
 
     }
-}
+}            

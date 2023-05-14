@@ -347,7 +347,18 @@ table {
     border-bottom: 1px solid lightgray;
 }
 
+.image-table-data {
+    width: 8%;
+    padding-left: 15px;
+    height: 60px;
+}
 
+.image-table-data > img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
 
 
 

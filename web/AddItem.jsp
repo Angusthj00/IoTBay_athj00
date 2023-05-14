@@ -64,11 +64,7 @@
             
             <div class="main-content">
                 <div class="form-container">
-                    <form action="AddItemController" method="POST">
-<!--                        <div>
-                            <label for="category"><span class="asterik">*</span>Category: </label>
-                            <input type="text" id="category" name="itemCategory">
-                        </div>-->
+                    <form action="AddItemController" method="POST" enctype="multipart/form-data">
                         <%
                             ArrayList<ArrayList<String>> categoryList = (ArrayList<ArrayList<String>>) session.getAttribute("categories");
                             String selectedCategory = (String) session.getAttribute("selectedCategory");
@@ -76,7 +72,7 @@
 
                         <div>
                             <label for="category"><span class="asterik">*</span>Category: </label>
-                            <select name="itemCategory" id="category">
+                            <select name="itemCategory" id="category" onchange="checkOption()">
                                 <%
                                     for (ArrayList<String> category : categoryList) {
                                     if (!category.get(0).equals("All")) {
@@ -85,10 +81,16 @@
                                 <option value="<%=categoryName%>" <%=(categoryName.equals(selectedCategory)) ? "selected" : ""%>><%=categoryName%></option>
                                 <% }} %>
                                 
-                                <option value="new category">---New Category---</option>
+                                <option value="newCategory">---New Category---</option>
+                                <input type="text" id="newCategory" name="newCategory" style="display: none;" placeholder="Enter new category"/>
                             </select>
                         </div>
-                                
+                        <script>
+                            function checkOption() {
+                                document.getElementById("newCategory").style.display = (document.getElementById("category").value === "newCategory") ? "" : "none";
+                            }
+                        </script>
+                                     
                         <div>
                             <label for="itemName"><span class="asterik">*</span>Item Name: </label>
                             <input type="text" id="itemName" name="itemName" placeholder="Item name. Max 100 characters" value="<%=(request.getParameter("itemName") != null) ? request.getParameter("itemName") : ""%>">
@@ -117,6 +119,17 @@
                                 output.onload = function () {
                                     URL.revokeObjectURL(output.src); //free memory
                                 };
+                            };
+                            
+                            window.onload = function() {
+                                var imageInput = document.getElementById("image");
+                                if (imageInput.files.length > 0) {
+                                    loadFile({
+                                        target: {
+                                            files: [imageInput.files[0]]
+                                        }
+                                    });
+                                }
                             };
                         </script>
                                 

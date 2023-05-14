@@ -63,11 +63,9 @@
             </div>
             
             <%
-                ArrayList<ArrayList<String>> categoryList = (ArrayList<ArrayList<String>>) session.getAttribute("categories");
-
                 String itemName = request.getParameter("name");
                 String itemCategory = request.getParameter("category");
-                String itemImane = request.getParameter("image");
+                String itemImage = request.getParameter("image");
                 String itemDescription = request.getParameter("description");
                 String itemPrice = request.getParameter("price");
                 String itemQuantity = request.getParameter("quantity");
@@ -75,7 +73,7 @@
             
             <div class="main-content">
                 <div class="form-container">
-                    <form action="EditItemController?name=<%=itemName%>" method="POST">
+                    <form action="EditItemController?name=<%=itemName%>&image=<%=itemImage%>" method="POST" enctype="multipart/form-data">
 <!--                        <div>
                             <label for="category"><span class="asterik">*</span>Category: </label>
                             <input type="text" id="category" name="itemCategory">
@@ -83,15 +81,7 @@
                         <div>
                             <label for="category"><span class="asterik">*</span>Category: </label>
                             <select name="itemCategory" id="category">
-                                <%
-                                    for (ArrayList<String> category : categoryList) {
-                                    if (!category.get(0).equals("All")) {
-                                    String categoryName = category.get(0);
-                                %>
-                                <option value="<%=categoryName%>" <%=(categoryName.equals(itemCategory)) ? "selected" : ""%>><%=categoryName%></option>
-                                <% }} %>
-                                
-                                <option value="new category">---New Category---</option>
+                                <option value="<%=itemCategory%>"><%=itemCategory%></option>
                             </select>
                         </div>
                                 
@@ -105,7 +95,7 @@
                             <input type="file" id="image" name="itemImage" accept="image/*" onchange="loadFile(event)">
 
                             <div class="image-container">
-                                <img id="image-output"/>
+                                <img id="image-output" name="uploadedImage" src="DBImages/<%=itemImage%>"/>
                                 
                                 <div class="image-upload-div">
                                     <img src="images/upload.png" alt="upload">

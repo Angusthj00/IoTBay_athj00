@@ -207,8 +207,7 @@ input[type="file"] {
     object-fit: cover;
     object-position: center;
     position: relative;
-    z-index: 5;
-    
+    z-index: 5; 
 }
 
 .image-upload-div {
@@ -259,9 +258,6 @@ input[type="file"] {
     color: red;
     margin-right: 5px;
 }
-
-
-
 
 
 

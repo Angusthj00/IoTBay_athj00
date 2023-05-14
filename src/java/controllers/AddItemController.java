@@ -13,10 +13,14 @@ import java.util.logging.Logger;
 import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
 import model.DAO.*;
 import models.Item;
@@ -26,6 +30,7 @@ import models.Item;
  *
  * @author angus
  */
+@MultipartConfig
 public class AddItemController extends HttpServlet {
     
     @Override
@@ -38,16 +43,25 @@ public class AddItemController extends HttpServlet {
         //*****important**** any data from getParameter input are all string
         //**** so need to server-side validate input                                                                                                               
         String itemName = request.getParameter("itemName");
-        String itemCategory = request.getParameter("itemCategory");
-        String itemImage = request.getParameter("itemImage");
+        String itemCategory;
+        Part file = request.getPart("itemImage");
         String itemDescription = request.getParameter("itemDescription");
         String itemCost = request.getParameter("itemPrice");
         String itemQuantity = request.getParameter("itemQuantity");
         
         DBItemManager itemManager = (DBItemManager) session.getAttribute("itemManager");
 
-        if (validator.checkEmpty(itemName, itemCategory, itemImage, itemCost, itemQuantity)) {
+        if (!request.getParameter("itemCategory").equals("newCategory")) {
+            itemCategory = request.getParameter("itemCategory");
+        } else {
+            itemCategory = request.getParameter("newCategory");
+        }
+        
+        if (validator.checkEmpty(itemName, itemCategory, itemCost, itemQuantity)) {
             session.setAttribute("addItemErr", "Please fill in the required fields.");
+            request.getRequestDispatcher("AddItem.jsp").include(request, response);
+        } else if (file.getSize() == 0) {
+            session.setAttribute("addItemErr", "Please upload an image.");
             request.getRequestDispatcher("AddItem.jsp").include(request, response);
         } else if (!validator.validateItemName(itemName)) {
             session.setAttribute("addItemErr", "Please enter a valid item name.");
@@ -55,9 +69,6 @@ public class AddItemController extends HttpServlet {
         } else if (!validator.validateItemCategory(itemCategory)) {
             session.setAttribute("addItemErr", "Please enter a valid item category.");
             request.getRequestDispatcher("AddItem.jsp").include(request, response); 
-        } else if (!validator.validateItemImage(itemImage)) {
-            session.setAttribute("addItemErr", "Please upload a valid image format (jpeg/jpg/png).");
-            request.getRequestDispatcher("AddItem.jsp").include(request, response);
         } else if (!validator.validateItemDescription(itemDescription)) {
             session.setAttribute("addItemErr", "Please enter a valid item description.");
             request.getRequestDispatcher("AddItem.jsp").include(request, response);
@@ -67,17 +78,42 @@ public class AddItemController extends HttpServlet {
         } else if (!validator.validateItemQuantity(itemQuantity)) {
             session.setAttribute("addItemErr", "Please enter a valid item quantity.");
             request.getRequestDispatcher("AddItem.jsp").include(request, response);
-        } else {       
+        } else {  
+            
+            //image upload process
+            String imageFileName = file.getSubmittedFileName(); //get selected image file name
+
+            //upload path where we have to upload our actual image
+            String uploadPath = "C:/Users/angus/OneDrive/Documents/NetBeansProjects/IoTBayProductCatalogue/web/DBImages/" + imageFileName;
+            
             try {
+                //image process*****
+                FileOutputStream fos = new FileOutputStream(uploadPath);
+                InputStream is = file.getInputStream();
+
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                fos.write(data);
+                fos.close(); //*****
+                
                 double doublePrice = Double.parseDouble(itemCost);
                 int intQuantity = Integer.parseInt(itemQuantity);
-                String selectedCategory = (String) session.getAttribute("selectedCategory");
                 
-                itemManager.addItem(itemName, itemCategory, itemImage, itemDescription, doublePrice, intQuantity);
-                ArrayList<Item> items = itemManager.fetchItemsByCategory("", selectedCategory);
+                itemManager.addItem(itemName, itemCategory, imageFileName, itemDescription, doublePrice, intQuantity);
+                
+                //store image path in session
+                String imagePath = "DBImages/";
+                session.setAttribute("imagePath", imagePath);
+                
+                ArrayList<ArrayList<String>> categories = itemManager.fetchCategories();
+                session.setAttribute("categories", categories);
+                                
+
+                ArrayList<Item> items = itemManager.fetchItemsByCategory("", itemCategory);
+                session.setAttribute("selectedCategory", itemCategory);
+                session.setAttribute("items", items);
                 
                 session.setAttribute("popupMsg", "Item added successfully.");
-                session.setAttribute("items", items);
                 request.getRequestDispatcher("ItemManagement.jsp").include(request, response);
 
             } catch (SQLException ex) {
