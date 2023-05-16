@@ -29,7 +29,14 @@
         <servlet-name>EditItemController</servlet-name>
         <servlet-class>controllers.EditItemController</servlet-class>
     </servlet>
-
+    <servlet>
+        <servlet-name>CustomerProductListController</servlet-name>
+        <servlet-class>controllers.CustomerProductListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerSearchItemController</servlet-name>
+        <servlet-class>controllers.CustomerSearchItemController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -58,7 +65,14 @@
         <servlet-name>EditItemController</servlet-name>
         <url-pattern>/EditItemController</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>CustomerProductListController</servlet-name>
+        <url-pattern>/CustomerProductListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerSearchItemController</servlet-name>
+        <url-pattern>/CustomerSearchItemController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

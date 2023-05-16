@@ -38,7 +38,7 @@
                 </div>
                 <div class="pop-up-content">
                     <div class="pop-up-title">Error</div>
-                    <div class="pop-up-text"></div>
+                    <div class="pop-up-text"><%=addItemErr%></div>
                 </div>
             </div>
             <script>

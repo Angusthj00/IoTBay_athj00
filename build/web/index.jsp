@@ -16,17 +16,13 @@
             <div class="login-button">
                 <a href="ItemManagementController">Login as Staff</a>
             </div>
-        </div>
+        </div> 
         
         <div class="user-login">
             <div class="login-button">
-                <a href="">Login as User</a>
+                <a href="CustomerProductListController">Login as User</a>
             </div>
         </div>
-        
-        
-        
-        
         
         <jsp:include page="/ConnServlet" flush="true" />
 

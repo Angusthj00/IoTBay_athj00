@@ -38,8 +38,8 @@ public class ItemManagementController extends HttpServlet {
         
         //to here
         ArrayList<Item> items = new ArrayList<>();
-        String selectedCategory =  request.getParameter("category");        
-
+        String selectedCategory =  request.getParameter("category");  
+        
         //fetch Items based on category selection        
         try {
             ArrayList<ArrayList<String>> categories = itemManager.fetchCategories();

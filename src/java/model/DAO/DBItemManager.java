@@ -19,6 +19,23 @@ public class DBItemManager {
         st = conn.createStatement();
     }
     
+    //pick particular item by id
+    public Item fetchItemById(int id) throws SQLException {
+        String fetch = "SELECT * FROM ITEM WHERE itemID = '" + id + "'";
+        ResultSet rs = st.executeQuery(fetch);
+        
+        int itemID = rs.getInt(1);
+        String itemName = rs.getString(2);
+        String itemCategory = rs.getString(3);
+        String itemImage = rs.getString(4);
+        String itemDescription = rs.getString(5);
+        double itemCost = rs.getDouble(6);
+        int itemQuantity = rs.getInt(7);
+        
+        Item item = new Item(itemID, itemName, itemCategory, itemImage, itemDescription, itemCost, itemQuantity);
+        return item;
+    }
+    
     //find item by name by category in db
     public ArrayList<Item> fetchItemsByCategory(String name, String category) throws SQLException {
         ArrayList<Item> temp = new ArrayList<>();
@@ -88,11 +105,11 @@ public class DBItemManager {
         st.executeUpdate("INSERT INTO ITEM(itemName, itemCategory, itemImage, itemDescription, itemCost, itemQuantity) " + "VALUES ('" + name + "', '" + category + "', '" + image + "', '" + description + "', '" + cost + "', '" + quantity + "')");
     }
     
-    //update an item in the db
+    //update an item (all records) in the db
     public void updateItem(String originalName, String name, String category, String image, String description, double cost, int quantity) throws SQLException {
         st.executeUpdate("UPDATE ITEM SET itemName = '" + name + "', itemCategory = '" + category + "', itemImage = '" + image + "', itemDescription = '" + description + "', itemCost = '" + cost + "', itemQuantity = '" + quantity + "' WHERE itemName = '" + originalName + "'");
     }
-    
+        
     //delete an item from db
     public void deleteItem(String name) throws SQLException {
         st.executeUpdate("DELETE FROM ITEM WHERE itemName = '" + name + "'");

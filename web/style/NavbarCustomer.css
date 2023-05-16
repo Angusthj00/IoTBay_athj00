@@ -1,0 +1,180 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 15 May 2023, 1:23:08 pm
+    Author     : angus
+*/
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+}
+
+.navbar-menu {
+
+    width: 100%;
+    height: 60px;
+    background-color: #0066cc;
+    font-size: 12px;
+    color: white;
+    display: flex;
+    flex-direction: row;    
+}
+
+.navbar-main {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: flex-end;
+    margin-right: 70px;
+}
+
+.navbar-logo, .navbar-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.navbar-logo {
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+.navbar-profile {
+    margin-right: 25px;
+}
+
+.navbar-profile > img {
+    height: 25px;
+    width: auto;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.search-form {
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.search-form > img {
+    height: 20px;
+    width: auto;
+    margin-left: 15px;
+}
+
+.search-form > input {
+    border: none;
+    outline: none;
+    padding: 12.5px;
+}
+
+.search-form > input::placeholder {
+    color: gray;
+}
+
+.search-button {
+    background-color: #ff6600;
+    color: white;
+    font-size: 14px;
+    width: 85px;
+    cursor: pointer;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.search-button:hover {
+    background-color: #e46600;
+}
+
+.navbar-item {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.navbar-item:hover {
+    background-color: #1790e7;
+}
+
+.active-navbar-item {
+    background-color: #004898;
+}
+
+.navbar-item > img {
+    width: auto;
+    margin-right: 10px;
+}
+
+.navbar-item:nth-child(1) > img {
+    height: 17px;
+}
+
+.navbar-item:nth-child(2) > img {
+    height: 20px;
+}
+
+.navbar-item:nth-child(3) > img {
+    height: 20px;
+}
+
+.cart-item-count {
+    position: absolute; 
+    top: 10px; 
+    right: 3px; 
+    margin-left: 3px; 
+    height: 15px; 
+    width: fit-content; 
+    padding: 0 5px; 
+    border-radius: 50%; 
+    background-color: red; 
+    text-align: center; 
+    padding-top: 3px;
+}
+
+
+
+.category-bar {
+    display: flex;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+    justify-content: center;
+}
+
+.category-bar > a {
+    text-decoration: none;
+}
+
+.category-item {
+    color: black;
+    font-size: 15px;
+    padding: 15px 25px;
+    cursor: pointer;
+    user-select: none;
+    width: fit-content;
+}
+
+.category-item:hover, .active-tab {
+    border-bottom: 2px solid #ff6600;
+    color: #ff6600;
+}
+
+
+
+
+
+
