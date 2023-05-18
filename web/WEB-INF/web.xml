@@ -37,6 +37,26 @@
         <servlet-name>CustomerSearchItemController</servlet-name>
         <servlet-class>controllers.CustomerSearchItemController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddShipmentController</servlet-name>
+        <servlet-class>controllers.AddShipmentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteShipmentController</servlet-name>
+        <servlet-class>controllers.DeleteShipmentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditShipmentController</servlet-name>
+        <servlet-class>controllers.EditShipmentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShipmentManagementController</servlet-name>
+        <servlet-class>controllers.ShipmentManagementController</servlet-class>
+    </servlet>
+
+    
+    
+    
     <servlet-mapping>
         <servlet-name>ConnServlet</servlet-name>
         <url-pattern>/ConnServlet</url-pattern>
@@ -73,6 +93,28 @@
         <servlet-name>CustomerSearchItemController</servlet-name>
         <url-pattern>/CustomerSearchItemController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddShipmentController</servlet-name>
+        <url-pattern>/AddShipmentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteShipmentController</servlet-name>
+        <url-pattern>/DeleteShipmentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditShipmentController</servlet-name>
+        <url-pattern>/EditShipmentController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShipmentManagementController</servlet-name>
+        <url-pattern>/ShipmentManagementController</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    
+    
+    
     <session-config>
         <session-timeout>
             30

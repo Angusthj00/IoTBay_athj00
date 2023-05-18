@@ -152,11 +152,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     display: flex;
     background-color: white;
     border-bottom: 1px solid lightgray;
-    justify-content: center;
+    justify-content: flex-start;
+    overflow-x: auto;
+    left: 0;
 }
 
 .category-bar > a {
     text-decoration: none;
+}
+
+.category-bar::-webkit-scrollbar {
+    height: 0px;
 }
 
 .category-item {
@@ -165,7 +171,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     padding: 15px 25px;
     cursor: pointer;
     user-select: none;
-    width: fit-content;
+    white-space: nowrap;
+    /*width: fit-content;*/
 }
 
 .category-item:hover, .active-tab {

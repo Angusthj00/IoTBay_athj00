@@ -25,6 +25,8 @@ import model.DAO.*;
 public class ConnServlet extends HttpServlet {
     private DBConnector db;
     private DBItemManager itemManager;
+    private DBShipmentManager shipmentManager;
+
     private Connection conn;
     
     @Override //create an instance of DBConnector for the deployment session
@@ -44,12 +46,24 @@ public class ConnServlet extends HttpServlet {
         
         try {
             itemManager = new DBItemManager(conn);
+            shipmentManager = new DBShipmentManager(conn);
+            //add db calls attribute here 
+            
+            
+            
+            
+            
         } catch (SQLException ex) {
             Logger.getLogger(ConnServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         //export the DBManager to the view-session (JSPs)
         session.setAttribute("itemManager", itemManager);
+        session.setAttribute("shipmentManager", shipmentManager);
+        //set session here
+        
+        
+        
     }
     
     @Override //destroy the servlet and release the resources of the application (terminate also the db connection)

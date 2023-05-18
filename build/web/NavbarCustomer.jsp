@@ -19,7 +19,7 @@
                     <input class="search-button" type="submit" value="Search">
                 </form>
             </div> 
-            <div class="navbar-item">
+            <div class="navbar-item" onclick="window.location.href='ShipmentManagementController'">
                 <img src="images/order.png" alt="your orders"/>
                 Your Orders
             </div>

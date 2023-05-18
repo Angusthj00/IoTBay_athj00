@@ -7,7 +7,7 @@ package controllers;
 import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import jakarta.servlet.http.Part;
+//import jakarta.servlet.http.Part;
 
 /**
  *
@@ -62,5 +62,28 @@ public class Validator implements Serializable {
 //    public void clear(HttpSession session) {
 //        //session.removeAttribute("addItemErr");
 //    }
+    
+    
+    
+//    Charlie Huang's
+    
+    private static final String DATE_PATTERN = "\\d{4}-\\d{2}-\\d{2}";
+    private static final String ADDRESS_PATTERN = ".+";
+
+    public boolean validateShipmentDate(String date) {
+        Pattern pattern = Pattern.compile(DATE_PATTERN);
+        Matcher matcher = pattern.matcher(date);
+        return matcher.matches();
+    }
+
+    public boolean validateShipmentAddress(String address) {
+        Pattern pattern = Pattern.compile(ADDRESS_PATTERN);
+        Matcher matcher = pattern.matcher(address);
+        return matcher.matches();
+    }
+
+    public boolean checkShipmentEmpty(String id, String method, String date, String address) {
+        return id.isEmpty() || method.isEmpty() || date.isEmpty() || address.isEmpty();
+    }
 
 }
