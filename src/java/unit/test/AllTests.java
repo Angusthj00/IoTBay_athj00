@@ -36,43 +36,43 @@ public class AllTests {
     }
     
     @Test
-    public void getId() {
+    public void testGetId() {
         int res = item.getId();
         assertEquals(20, res);
     }
     
     @Test
-    public void getName() {
+    public void testGetName() {
         String res = item.getName();
         assertEquals("Samsung Note 10", res);
     }
     
     @Test 
-    public void getCategory() {
+    public void testGetCategory() {
         String res = item.getCategory();
         assertEquals("Smartphone", res);
     }
     
     @Test 
-    public void getImage() {
+    public void testGetImage() {
         String res = item.getImage();
         assertEquals("samsung.jpg", res);
     }
     
     @Test
-    public void getDescription() {
+    public void testGetDescription() {
         String res = item.getDescription();
         assertEquals("This is samsung phone.", res);
     }
     
     @Test
-    public void getPrice() {
+    public void testGetPrice() {
         double res = item.getPrice();
         assertEquals(1299.99, res, 0.001);
     }
     
     @Test
-    public void getQuantity() {
+    public void testGetQuantity() {
         int res = item.getQuantity();
         assertEquals(10, res, 0.001);
     }
@@ -83,7 +83,7 @@ public class AllTests {
         conn = db.openConnection(); //set up connection
         
         try {
-            itemManager = new DBItemManager(conn);
+            itemManager = new DBItemManager(conn); //create new DBManager instance
         
             // Provide sample data for testing
             String name = "Samsung A9";
@@ -109,17 +109,51 @@ public class AllTests {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            db.closeConnection();
         }
     }
     
+
     
-    
-    
+    @Test
+    public void testUpdateItem() throws SQLException {
+        conn = db.openConnection(); // set up connection
+
+        try {
+            itemManager = new DBItemManager(conn); // create new DBManager instance
+
+            // Provide sample data for testing
+            String originalName = "Samsung A9";
+            String newName = "Samsung A9 Plus";
+            String newCategory = "Smartphone";
+            String newImage = "samsungA9_plus.jpg";
+            String newDescription = "This is an updated Samsung A9 Plus phone.";
+            double newCost = 1199.99;
+            int newQuantity = 8;
+
+            // Call the updateItem method
+            itemManager.updateItem(originalName, newName, newCategory, newImage, newDescription, newCost, newQuantity);
+
+            // Retrieve the updated item from the database
+            Item updatedItem = itemManager.fetchItemByName(newName); // Assuming there's a method to retrieve an item by name
+            assertNotNull(updatedItem); // Assert that the updated item is not null
+            assertEquals(newName, updatedItem.getName());
+            assertEquals(newCategory, updatedItem.getCategory());
+            assertEquals(newImage, updatedItem.getImage());
+            assertEquals(newDescription, updatedItem.getDescription());
+            assertEquals(newCost, updatedItem.getPrice(), 0.001); // Assuming a tolerance of 0.001 for floating-point comparison
+            assertEquals(newQuantity, updatedItem.getQuantity());
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            db.closeConnection();
+        }
+    }
+
     
     
 }
-    
-    
-    
     
 
