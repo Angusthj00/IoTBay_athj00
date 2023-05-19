@@ -110,7 +110,7 @@ public class AllTests {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-            db.closeConnection();
+            db.closeConnection(); //close connection!!!!
         }
     }
     
@@ -151,6 +151,32 @@ public class AllTests {
             db.closeConnection();
         }
     }
+    
+    @Test
+    public void testDeleteItem() throws SQLException {
+        conn = db.openConnection(); // set up connection
+
+        try {
+            itemManager = new DBItemManager(conn); // create new DBManager instance
+
+            // Provide sample data for testing
+            String itemName = "Samsung A9 Plus";
+
+            // Call the deleteItem method
+            itemManager.deleteItem(itemName);
+
+            // Attempt to retrieve the deleted item from the database
+            Item deletedItem = itemManager.fetchItemByName(itemName); // Assuming there's a method to retrieve an item by name
+
+            assertNull(deletedItem); // Assert that the deleted item is null (indicating it was successfully deleted)
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            db.closeConnection();
+        }
+    }
+
 
     
     

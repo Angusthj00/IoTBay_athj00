@@ -24,16 +24,20 @@ public class DBItemManager {
         String fetch = "SELECT * FROM ITEM WHERE itemName = '" + name + "'";
         ResultSet rs = st.executeQuery(fetch);
         
-        int itemID = rs.getInt(1);
-        String itemName = rs.getString(2);
-        String itemCategory = rs.getString(3);
-        String itemImage = rs.getString(4);
-        String itemDescription = rs.getString(5);
-        double itemCost = rs.getDouble(6);
-        int itemQuantity = rs.getInt(7);
-        
-        Item item = new Item(itemID, itemName, itemCategory, itemImage, itemDescription, itemCost, itemQuantity);
-        return item;
+        if (rs.next()) {
+            int itemID = rs.getInt(1);
+            String itemName = rs.getString(2);
+            String itemCategory = rs.getString(3);
+            String itemImage = rs.getString(4);
+            String itemDescription = rs.getString(5);
+            double itemCost = rs.getDouble(6);
+            int itemQuantity = rs.getInt(7);
+
+            Item item = new Item(itemID, itemName, itemCategory, itemImage, itemDescription, itemCost, itemQuantity);
+            return item; 
+        } else {
+            return null;
+        }
     }
     
     //find item by name by category in db
