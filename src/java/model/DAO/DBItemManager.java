@@ -19,9 +19,9 @@ public class DBItemManager {
         st = conn.createStatement();
     }
     
-    //pick particular item by id
-    public Item fetchItemById(int id) throws SQLException {
-        String fetch = "SELECT * FROM ITEM WHERE itemID = '" + id + "'";
+    //pick particular item by id // for testingggggg
+    public Item fetchItemByName(String name) throws SQLException {
+        String fetch = "SELECT * FROM ITEM WHERE itemName = '" + name + "'";
         ResultSet rs = st.executeQuery(fetch);
         
         int itemID = rs.getInt(1);

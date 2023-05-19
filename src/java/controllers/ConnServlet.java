@@ -25,7 +25,6 @@ import model.DAO.*;
 public class ConnServlet extends HttpServlet {
     private DBConnector db;
     private DBItemManager itemManager;
-    private DBShipmentManager shipmentManager;
 
     private Connection conn;
     
@@ -46,7 +45,6 @@ public class ConnServlet extends HttpServlet {
         
         try {
             itemManager = new DBItemManager(conn);
-            shipmentManager = new DBShipmentManager(conn);
             //add db calls attribute here 
             
             
@@ -59,7 +57,6 @@ public class ConnServlet extends HttpServlet {
         
         //export the DBManager to the view-session (JSPs)
         session.setAttribute("itemManager", itemManager);
-        session.setAttribute("shipmentManager", shipmentManager);
         //set session here
         
         

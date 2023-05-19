@@ -73,7 +73,7 @@
             
             <div class="main-content">
                 <div class="form-container">
-                    <form action="EditItemController?name=<%=itemName%>&image=<%=itemImage%>" method="POST" enctype="multipart/form-data">
+                    <form action="EditItemController?name=<%=itemName%>&category=<%=itemCategory%>&image=<%=itemImage%>&description=<%=itemDescription%>&price=<%=itemPrice%>&quantity=<%=itemQuantity%>" method="POST" enctype="multipart/form-data">
 <!--                        <div>
                             <label for="category"><span class="asterik">*</span>Category: </label>
                             <input type="text" id="category" name="itemCategory">

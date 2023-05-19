@@ -43,7 +43,11 @@ public class EditItemController extends HttpServlet {
         DBItemManager itemManager = (DBItemManager) session.getAttribute("itemManager");
          
         String oriName = request.getParameter("name");
+//        String oriCategory = request.getParameter("category");
         String oriImage = request.getParameter("image");
+//        String oriDescription = request.getParameter("description");
+//        String oriPrice = request.getParameter("price");
+//        String oriQuantity = request.getParameter("quantity");
         
         String newName = request.getParameter("itemName");
         String newCategory = request.getParameter("itemCategory");

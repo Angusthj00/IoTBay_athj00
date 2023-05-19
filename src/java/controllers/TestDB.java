@@ -22,7 +22,7 @@ public class TestDB {
     private DBItemManager db;
     
     public static void main(String[] args) throws SQLException {
-        (new TestDB()).selectItem();
+//        (new TestDB()).selectItem();
 //        Validator validator = new Validator();       
 //        if (!validator.validateItemCategory("ABC")) {
 //            System.out.println("Invalid category");
@@ -190,16 +190,16 @@ public class TestDB {
         }
     }
     
-    private void selectItem() {
-        try {
-            Item item = db.fetchItemById(116);
-            System.out.println("ITEM TABLE: ");
-            System.out.printf("%-10s %-20s %-20s %-20s %-100s %-20s %-20s \n", item.getId(), item.getName(), item.getCategory(), item.getImage(), item.getDescription(), item.getPrice(), item.getQuantity());
-            System.out.println();
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    private void selectItem() {
+//        try {
+//            Item item = db.fetchItemById(116);
+//            System.out.println("ITEM TABLE: ");
+//            System.out.printf("%-10s %-20s %-20s %-20s %-100s %-20s %-20s \n", item.getId(), item.getName(), item.getCategory(), item.getImage(), item.getDescription(), item.getPrice(), item.getQuantity());
+//            System.out.println();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TestDB.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
         
     
 }
