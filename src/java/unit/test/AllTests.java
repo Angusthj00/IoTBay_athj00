@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 import models.Item;
 import model.DAO.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 /**
@@ -176,6 +177,42 @@ public class AllTests {
             db.closeConnection();
         }
     }
+    
+    @Test
+    public void testFetchItemsByCategory() throws SQLException {
+        conn = db.openConnection(); // set up connection
+
+        try {
+            itemManager = new DBItemManager(conn); // create new DBManager instance
+
+            // Test case 1: Searching for items with a specific name and category
+            String name1 = "Samsung";
+            String category1 = "Smartphone";
+            ArrayList<Item> items1 = itemManager.fetchItemsByCategory(name1, category1);
+            assertNotNull(items1);
+            assertTrue(items1.size() > 0);
+
+            // Test case 2: Searching for items with a specific name and "All" categories
+            String name2 = "Apple";
+            String category2 = "All";
+            ArrayList<Item> items2 = itemManager.fetchItemsByCategory(name2, category2);
+            assertNotNull(items2);
+            assertTrue(items2.size() > 0);
+
+            // Test case 3: Searching for items with a specific category regardless of the name
+            String name3 = "";
+            String category3 = "Laptop";
+            ArrayList<Item> items3 = itemManager.fetchItemsByCategory(name3, category3);
+            assertNotNull(items3);
+            assertTrue(items3.size() > 0);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            db.closeConnection();
+        }
+    }
+
 
 
     
